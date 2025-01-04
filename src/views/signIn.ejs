@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head', { title: 'FreshCart' }) %>
+  </head>
+
+  <body>
+    <!-- navigation -->
+    <div class="border-bottom shadow-sm">
+      <nav class="navbar navbar-light py-2">
+        <div
+          class="container justify-content-center justify-content-lg-between"
+        >
+          <a class="navbar-brand" href="/">
+            <img
+              src="../assets/images/logo/freshcart-logo.svg"
+              alt=""
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <span class="navbar-text">
+            Bạn chưa có tài khoản?
+            <a href="/signUp">Đăng ký</a>
+          </span>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <!-- section -->
+      <section class="my-lg-14 my-8">
+        <div class="container">
+          <!-- row -->
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
+              <!-- img -->
+              <img
+                src="../assets/images/svg-graphics/signin-g.svg"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+            <!-- col -->
+            <div
+              class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1"
+            >
+              <div class="mb-lg-9 mb-5">
+                <h1 class="mb-1 h2 fw-bold">Hãy bắt đầu mua sắm</h1>
+                <p>
+                  Chào mừng trở lại với FreshCart! Vui lòng nhập nhập thông tin
+                  để bắt đầu.
+                </p>
+              </div>
+
+              <form
+                action="/auth/signIn"
+                method="POST"
+                class="needs-validation"
+                novalidate
+              >
+                <div class="row g-3">
+                  <div class="col-12">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      placeholder="Email"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Please enter a valid email.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="Password"
+                      required
+                    />
+                    <div class="invalid-feedback">Please enter a password.</div>
+                  </div>
+                  <% if (typeof error !== 'undefined' && error) { %>
+                  <div class="alert alert-danger"><%= error %></div>
+                  <% } %>
+                  <div class="col-12 d-grid">
+                    <button type="submit" class="btn btn-primary">
+                      Đăng nhập
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <%- include('./partials/footer.ejs') %>
+
+    <!-- Javascript-->
+    <%- include('./partials/js.ejs') %>
+  </body>
+
+  <!-- Mirrored from freshcart.codescandy.com/pages/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:47:07 GMT -->
+</html>

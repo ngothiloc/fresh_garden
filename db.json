@@ -1,0 +1,135 @@
+{
+  "/auth/users": [
+    {
+      "id": "1",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin123"
+    },
+    {
+      "id": "ad37",
+      "name": "loc",
+      "email": "loc@gmail.com",
+      "password": "loc123"
+    }
+  ],
+  "category": [
+    {
+      "id": "1",
+      "name": "Sữa, bánh mì, trứng",
+      "image": "../../assets/images/category/category-dairy-bread-eggs.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Đồ ăn vặt",
+      "image": "../../assets/images/category/category-snack-munchies.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Bánh mì, bánh quy",
+      "image": "../../assets/images/category/category-bakery-biscuits.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Thức ăn nhanh",
+      "image": "../../assets/images/category/category-instant-food.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Trà cà phê, đồ uống",
+      "image": "../../assets/images/category/category-tea-coffee-drinks.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Gạo",
+      "image": "../../assets/images/category/category-atta-rice-dal.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Mẹ và bé",
+      "image": "../../assets/images/category/category-baby-care.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Gà, thịt, cá",
+      "image": "../../assets/images/category/category-chicken-meat-fish.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Chăm sóc thú cưng",
+      "image": "../../assets/images/category/category-pet-care.jpg"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Sev Bhujia",
+      "category": "Đồ ăn vặt",
+      "price": 30,
+      "image": "../../assets/images/products/product-img-1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Bánh quy NutriChoice",
+      "category": "Bánh mì, bánh quy",
+      "price": 20,
+      "image": "../../assets/images/products/product-img-2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Socola Cadbury 5 Star",
+      "category": "Bánh mì, bánh quy",
+      "price": 185,
+      "image": "../../assets/images/products/product-img-3.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Khoai tây chiên vị hành",
+      "category": "Đồ ăn vặt",
+      "price": 32,
+      "image": "../../assets/images/products/product-img-4.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Bỏng ngô vị muối",
+      "category": "Đồ ăn vặt",
+      "price": 20,
+      "image": "../../assets/images/products/product-img-5.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Sữa chua Hy Lạp vị việt quất",
+      "category": "Sữa, bánh mì, trứng",
+      "price": 25,
+      "image": "../../assets/images/products/product-img-6.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Lát phô mai Britannia",
+      "category": "Sữa, bánh mì, trứng",
+      "price": 105,
+      "image": "../../assets/images/products/product-img-7.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Ngũ cốc Kellogg’s",
+      "category": "Thức ăn nhanh",
+      "price": 25,
+      "image": "../../assets/images/products/product-img-8.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Socola ngũ cốc kê Slurrp Farm",
+      "category": "Thức ăn nhanh",
+      "price": 150,
+      "image": "../../assets/images/products/product-img-9.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Bơ Amul ",
+      "category": "Sữa, bánh mì, trứng",
+      "price": 188,
+      "image": "../../assets/images/products/product-img-10.jpg"
+    }
+  ]
+}
