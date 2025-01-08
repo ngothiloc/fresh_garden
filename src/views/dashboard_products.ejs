@@ -26,23 +26,25 @@
               <!-- page header -->
               <div class="d-md-flex justify-content-between align-items-center">
                 <div>
-                  <h2>Products</h2>
+                  <h2>Quản lý sản phẩm</h2>
                   <!-- breacrumb -->
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                       <li class="breadcrumb-item">
                         <a href="/dashboard" class="text-inherit"
-                          >Dashboard /
+                          >Trang quản lý /
                         </a>
                       </li>
-                      <li>Products</li>
+                      <li>Sản phẩm</li>
                     </ol>
                   </nav>
                 </div>
                 <!-- button -->
                 <div>
-                  <a href="add-product.html" class="btn btn-primary"
-                    >Add Product</a
+                  <a
+                    href="/dashboard/products/add_products"
+                    class="btn btn-primary"
+                    >Thêm sản phẩm</a
                   >
                 </div>
               </div>
@@ -231,7 +233,6 @@
     <!-- Theme JS -->
     <script src="../assets/js/theme.min.js"></script>
     <script>
-      // Hàm xóa sản phẩm khi nhấn vào nút Delete
       async function deleteProduct(productId) {
         const confirmed = await confirm(
           "Are you sure you want to delete this product?"
@@ -272,8 +273,7 @@
           if (productRow) {
             productRow.remove();
           }
-
-          await updateProductList();
+          // await updateProductList();
         } catch (error) {
           console.error("Error deleting product:", error);
           alert("An error occurred while deleting the product.");

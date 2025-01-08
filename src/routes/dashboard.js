@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const ProductsController = require('../controllers/productController');
-// const CategoryController = require('../controllers/categoryController');
+const productsRoute = require('./products');
 
 // Route để hiển thị trang dashboard
 router.get('/', (req, res) => {
     res.render('dashboard');
 });
 
-router.get('/products', ProductsController.renderProductsPage);
-
-// router.get('/category', CategoryController.renderCategories);
+// Sử dụng các route của products
+router.use('/products', productsRoute);
 
 module.exports = router;

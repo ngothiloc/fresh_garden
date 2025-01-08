@@ -504,52 +504,30 @@
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  >Account</a
-                >
+                  id="accountLink"
+                >Account</a>
                 <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="pages/signin.html"
-                      >Đăng ký</a
-                    >
+                  <li id="signupMenuItem">
+                    <a class="dropdown-item" href="/auth/register">Đăng ký</a>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="pages/signup.html"
-                      >Đăng nhập</a
-                    >
+                  <li id="signinMenuItem">
+                    <a class="dropdown-item" href="/auth/login">Đăng nhập</a>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="pages/forgot-password.html"
-                      >Quên mật khẩu</a
-                    >
-                  </li>
+                  <!-- <li>
+                    <a class="dropdown-item" href="pages/forgot-password.html">Quên mật khẩu</a>
+                  </li> -->
                   <li class="dropdown-submenu dropend">
-                    <a
-                      class="dropdown-item dropdown-list-group-item dropdown-toggle"
-                      href="#"
-                      >Tài khoản của tôi</a
-                    >
+                    <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Tài khoản của tôi</a>
                     <ul class="dropdown-menu">
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="pages/account-orders.html"
-                          >Đơn hàng</a
-                        >
+                      <!-- <li>
+                        <a class="dropdown-item" href="pages/account-orders.html">Đơn hàng</a>
                       </li>
                       <li>
-                        <a
-                          class="dropdown-item"
-                          href="pages/account-address.html"
-                          >Địa chỉ</a
-                        >
+                        <a class="dropdown-item" href="pages/account-address.html">Địa chỉ</a>
                       </li>
                       <li>
-                        <a
-                          class="dropdown-item"
-                          href="pages/account-payment-method.html"
-                          >Phương thức thanh toán</a
-                        >
-                      </li>
+                        <a class="dropdown-item" href="pages/account-payment-method.html">Phương thức thanh toán</a>
+                      </li> -->
                     </ul>
                   </li>
                 </ul>
@@ -564,3 +542,27 @@
     </div>
   </nav>
 <hr>
+
+<script>
+// Giả sử bạn có một cách để kiểm tra trạng thái đăng nhập, ví dụ kiểm tra thông qua localStorage hoặc sessionStorage
+// Nếu người dùng đã đăng nhập, bạn có thể lưu trữ thông tin như tên người dùng trong localStorage/sessionStorage
+
+// Hàm kiểm tra đăng nhập và cập nhật menu
+function updateMenu() {
+  // Kiểm tra nếu người dùng đã đăng nhập (ví dụ kiểm tra localStorage)
+  const isLoggedIn = localStorage.getItem("isLoggedIn"); // Giả sử có một giá trị trong localStorage
+
+  if (isLoggedIn) {
+    const username = localStorage.getItem("username"); // Lấy tên người dùng từ localStorage
+    const accountLink = document.getElementById("accountLink");
+    accountLink.textContent = username; // Hiển thị tên người dùng thay vì "Account"
+    
+    // Ẩn các mục đăng ký và đăng nhập
+    document.getElementById("signupMenuItem").style.display = "none";
+    document.getElementById("signinMenuItem").style.display = "none";
+  }
+}
+
+// Gọi hàm khi tải trang
+updateMenu();
+</script>

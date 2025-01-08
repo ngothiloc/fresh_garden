@@ -25,18 +25,13 @@ const ProductModel = {
         }
     },
 
-    deleteProduct: async function (id) {
+    addProduct: async function (data) {
         try {
-            const response = await axios.delete(`${PRODUCTS_API_URL}/${id}`);
-            if (response.status === 200) {
-                return true;  // Trả về true nếu xóa thành công
-            } else {
-                console.error('Failed to delete product. Status:', response.status);
-                return false;  // Trả về false nếu xóa không thành công
-            }
+            const response = await axios.post(PRODUCTS_API_URL, data);
+            return response.data;  // Trả về kết quả từ API
         } catch (error) {
-            console.error('Error deleting product:', error);
-            return false;  // Trả về false nếu có lỗi
+            console.error('Error adding product:', error);
+            throw error;
         }
     }
 };

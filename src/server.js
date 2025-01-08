@@ -14,6 +14,7 @@ app.set('views', path.join(__dirname, '../src/views'));
 
 // Static Files Setup
 app.use('/assets', express.static(path.join(__dirname, '../src/assets')));
+app.use('/dashboard/assets', express.static(path.join(__dirname, '../src/assets')));
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Middleware for Request Parsing
@@ -21,12 +22,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session Configuration
-app.use(session({
-    secret: 'mysecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Use `true` with HTTPS
-}));
+// app.use(session({
+//     secret: 'mysecret',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false } // Use `true` with HTTPS
+// }));
 
 // Route Setup
 app.use('/dashboard', dashboardRouter);

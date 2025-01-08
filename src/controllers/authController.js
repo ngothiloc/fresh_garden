@@ -1,77 +1,73 @@
-const axios = require("axios");
+const AuthModel = require('../models/authModel');
+const bcrypt = require('bcrypt'); // Thư viện mã hóa mật khẩu
 
-// URL API
-const API_URL = "http://localhost:3000/users";
+const authController = {
+    // Hiển thị trang đăng ký
+    renderSignUpPage: (req, res) => {
+        res.render('signUp');
+    },
 
-/**
- * GET /signUp - Hiển thị form đăng ký
- */
-exports.getSignIn = (req, res) => {
-    res.render("signIn", { error: null }); // Đảm bảo error được định nghĩa
-};
+    // Hiển thị trang đăng nhập
+    renderSignInPage: (req, res) => {
+        res.render('signIn');
+    },
 
-/**
- * POST /signIn - Xử lý đăng ký thông qua API
- */
-exports.postSignIn = async (req, res) => {
-    const { email, password } = req.body;
+    // Xử lý đăng ký
+    registerUser: async (req, res) => {
+        const { name, email, password } = req.body;
 
-    try {
-        // Logic kiểm tra đăng nhập
-        const isValid = email === "test@example.com" && password === "password"; // Thay bằng logic thật
-
-        if (isValid) {
-            // Đăng nhập thành công
-            return res.redirect("/");
-        } else {
-            // Thông tin không đúng
-            return res.render("signIn", { error: "Email hoặc mật khẩu không đúng." });
-        }
-    } catch (error) {
-        // Lỗi hệ thống
-        return res.render("signIn", {
-            error: "Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau.",
-        });
-    }
-};
-
-/**
- * POST /signUp - Xử lý đăng ký thông qua API
- */
-exports.postSignUp = async (req, res) => {
-    const { name, email, password } = req.body;
-
-    try {
-        // Gửi dữ liệu tới API để đăng ký người dùng
-        const response = await axios.post(API_URL, {
-            name,
-            email,
-            password,
-        });
-
-        // Kiểm tra nếu đăng ký thành công (HTTP status 201 - Created)
-        if (response.status === 201) {
-            // Đăng ký thành công, chuyển hướng đến trang đăng nhập
-            return res.redirect("/signIn");
-        } else {
-            // Nếu có lỗi từ API, hiển thị thông báo
-            return res.render("signUp", { error: "Đã xảy ra lỗi. Vui lòng thử lại." });
-        }
-    } catch (error) {
-        // Xử lý lỗi (ví dụ: email đã tồn tại hoặc lỗi hệ thống)
-        let errorMessage = "Đã xảy ra lỗi. Vui lòng thử lại.";
-        if (error.response && error.response.status === 400) {
-            errorMessage = "Email đã tồn tại. Vui lòng sử dụng email khác.";
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required.' });
         }
 
-        // Hiển thị thông báo lỗi cho người dùng
-        res.render("signUp", { error: errorMessage });
-    }
+        try {
+            const existingUser = await AuthModel.findUserByEmail(email);
+            if (existingUser) {
+                return res.status(400).json({ message: 'Email is already registered.' });
+            }
+
+            // Mã hóa mật khẩu
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            // Thêm người dùng vào cơ sở dữ liệu
+            await AuthModel.addUser({ name, email, password: hashedPassword });
+
+            // Chuyển hướng đến trang đăng nhập
+            res.redirect('/auth/login'); // Chuyển hướng đến trang signIn.ejs        
+        } catch (error) {
+            console.error('Register Error:', error);
+            res.status(500).json({ message: 'Server error during registration.' });
+        }
+    },
+
+    // Xử lý đăng nhập
+    loginUser: async (req, res) => {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'All fields are required.' });
+        }
+
+        try {
+            const user = await AuthModel.findUserByEmail(email);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found.' });
+            }
+
+            // So sánh mật khẩu
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Invalid credentials.' });
+            }
+
+            // Chuyển hướng đến trang index
+            res.redirect('/'); // Chuyển hướng đến trang chính (index)
+
+        } catch (error) {
+            console.error('Login Error:', error);
+            res.status(500).json({ message: 'Server error during login.' });
+        }
+    },
 };
 
-/**
- * GET /signIn - Hiển thị form đăng nhập
- */
-exports.getSignUp = (req, res) => {
-    res.render("signUp", { error: null }); // Đảm bảo error được định nghĩa
-};
+module.exports = authController;

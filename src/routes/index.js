@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
         const selectedProduct = products.length ? products[0] : null;
 
         res.render('index', {
-            title: 'Welcome to FreshCart',
             categories,
             products,
             selectedProduct
@@ -28,10 +27,6 @@ router.get('/', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-// Sign Up and Sign In Pages
-router.get('/signUp', (req, res) => res.render('signUp', { title: 'Đăng ký' }));
-router.get('/signIn', (req, res) => res.render('signIn', { title: 'Đăng nhập' }));
 
 // Product Details Route (JSON response)
 router.get('/products/:id', async (req, res) => {
