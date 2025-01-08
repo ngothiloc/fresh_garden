@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from freshcart.codescandy.com/dashboard/products.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:47:36 GMT -->
+  <head>
+    <%- include('./partials/dashboard_head', { title: 'Dashboard - products' })
+    %>
+  </head>
+
+  <body>
+    <!-- main wrapper-->
+
+    <!-- navbar -->
+    <%- include('./partials/dashboard_navbar') %>
+
+    <div class="main-wrapper">
+      <!-- navbar vertical -->
+      <!-- navbar -->
+      <%- include('./partials/dashboard_navbar_vertical', { activePage:
+      'categories' }) %>
+
+      <!-- main -->
+      <main class="main-content-wrapper">
+        <div class="container">
+          <div class="row mb-8">
+            <div class="col-md-12">
+              <!-- page header -->
+              <div class="d-md-flex justify-content-between align-items-center">
+                <div>
+                  <h2>Quản lý danh mục sản phẩm</h2>
+                  <!-- breacrumb -->
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                      <li class="breadcrumb-item">
+                        <a href="/dashboard" class="text-inherit"
+                          >Trang quản lý /
+                        </a>
+                      </li>
+                      <li>Danh mục sản phẩm</li>
+                    </ol>
+                  </nav>
+                </div>
+                <!-- button -->
+                <div>
+                  <a
+                    href="/dashboard/categories/add_categories"
+                    class="btn btn-primary"
+                    >Thêm danh mục sản phẩm</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+          <div class="row">
+            <div class="col-xl-12 col-12 mb-5">
+              <div
+                id="success-message-container"
+                class="alert-container"
+                style="display: none"
+              ></div>
+              <!-- card -->
+              <div class="card h-100 card-lg">
+                <div class="px-6 py-6">
+                  <div class="row justify-content-between">
+                    <!-- form -->
+                    <div class="col-lg-7 col-md-6 col-12 mb-2 mb-lg-0">
+                      <form
+                        class="d-flex"
+                        role="search"
+                        action="/dashboard/categories/search"
+                        method="GET"
+                      >
+                        <input
+                          class="form-control me-2"
+                          type="search"
+                          placeholder="Tìm kiếm bằng tên sản phẩm"
+                          aria-label="Search Name"
+                          name="name"
+                          value="<%= searchQuery %>"
+                        />
+                        <button class="btn btn-outline-success" type="submit">
+                          Search
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- card body -->
+                <div class="card-body p-0">
+                  <!-- table -->
+                  <div class="table-responsive">
+                    <table
+                      class="table table-centered table-hover text-nowrap table-borderless mb-0 table-with-checkbox"
+                    >
+                      <thead class="bg-light">
+                        <tr>
+                          <th>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="checkAll"
+                              />
+                              <label
+                                class="form-check-label"
+                                for="checkAll"
+                              ></label>
+                            </div>
+                          </th>
+                          <th>Ảnh</th>
+                          <th>Danh mục</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="categoriesTableBody"></tbody>
+                        <% if (categories.length === 0) { %>
+                        <tr>
+                          <td colspan="6">Không có sản phẩm phù hơp.</td>
+                        </tr>
+                        <% } else { %> <% categories.forEach((categories, index) => {
+                        %>
+                        <tr id="categoryRow-<%= categories.id %>">
+                          <td><%= index + 1 %></td>
+                          <td>
+                            <a href="#!">
+                              <img
+                                src="<%= categories.image %>"
+                                alt="<%= categories.name %>"
+                                class="icon-shape icon-md"
+                                style="border-radius: 5px"
+                              />
+                            </a>
+                          </td>
+                          <td>
+                            <a href="#" class="text-reset"
+                              ><%= categories.name %></a
+                            >
+                          </td>
+                          <td>
+                            <div class="dropdown">
+                              <a
+                                href="#"
+                                class="text-reset"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                <i
+                                  class="feather-icon icon-more-vertical fs-5"
+                                ></i>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li>
+                                  <a
+                                    class="dropdown-item"
+                                    href="#"
+                                    onclick="deleteProduct('<%= categories.id %>')"
+                                    ><i class="bi bi-trash me-3"></i>Delete</a
+                                  >
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" href="#"
+                                    ><i class="bi bi-pencil-square me-3"></i
+                                    >Edit</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Libs JS -->
+    <!-- <script src="../assets/libs/jquery/dist/jquery.min.js"></script> -->
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+    <!-- Theme JS -->
+    <script src="../assets/js/theme.min.js"></script>
+    <script>
+      async function deleteProduct(productId) {
+        const confirmed = await confirm(
+          "Are you sure you want to delete this product?"
+        );
+        if (!confirmed) return;
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/category/${productId}`,
+            {
+              method: "DELETE",
+            }
+          );
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to delete product.");
+          }
+
+          // Hiển thị thông báo thành công
+          const successMessage = document.createElement("div");
+          successMessage.classList.add("alert", "alert-success");
+          successMessage.textContent = "Xoá danh mục thành công!";
+          const successMessageContainer = document.getElementById(
+            "success-message-container"
+          );
+          successMessageContainer.innerHTML = ""; // Xóa thông báo cũ
+          successMessageContainer.appendChild(successMessage);
+
+          // Hiển thị thông báo trong 3 giây rồi xóa
+          successMessageContainer.style.display = "block"; // Hiển thị thông báo
+          setTimeout(() => {
+            successMessageContainer.style.display = "none"; // Ẩn thông báo sau 3 giây
+          }, 3000);
+
+          // Xóa dòng sản phẩm khỏi bảng
+          const categoryRow = document.getElementById(`categoryRow-${productId}`);
+          if (categoryRow) {
+            categoryRow.remove();
+          }
+          // await updateProductList();
+        } catch (error) {
+          console.error("Error deleting product:", error);
+          alert("An error occurred while deleting the product.");
+        }
+      }
+    </script>
+  </body>
+
+  <!-- Mirrored from freshcart.codescandy.com/dashboard/products.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:47:36 GMT -->
+</html>

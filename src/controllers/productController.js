@@ -22,7 +22,7 @@ const ProductsController = {
 
     renderAddProductPage: async function (req, res) {
         try {
-            // Lấy danh sách sản phẩm và danh mục
+            // Lấy danh sách danh mục
             const categories = await ProductModel.getCategories();
 
             // Truyền cả `products` và `categories` vào view
@@ -71,7 +71,7 @@ const ProductsController = {
 
             // Trả về kết quả tìm kiếm
             res.render('dashboard_products', {
-                title: 'Products Search Results',
+                title: 'Products Search',
                 products,
                 searchQuery: name || ''
             });

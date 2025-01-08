@@ -15,7 +15,7 @@
       <!-- navbar vertical -->
       <!-- navbar -->
       <%- include('./partials/dashboard_navbar_vertical', { activePage:
-      'products' }) %>
+      'categories' }) %>
 
       <!-- main -->
       <main class="main-content-wrapper">
@@ -49,121 +49,76 @@
                 </div>
                 <!-- button -->
                 <div>
-                  <a href="/dashboard/products" class="btn btn-light">Trở về</a>
+                  <a href="/dashboard/categories/" class="btn btn-light"
+                    >Trở về</a
+                  >
                 </div>
               </div>
             </div>
           </div>
           <!-- row -->
           <form
-            action="/dashboard/products/add"
+            action="/dashboard/categories/add"
             method="POST"
             enctype="multipart/form-data"
           >
             <div class="row">
-              <div class="col-lg-8 col-12">
+              <div class="col-lg-12 col-12">
                 <!-- card -->
-                <div class="card mb-6 card-lg">
+                <div class="card mb-6 shadow border-0">
                   <!-- card body -->
                   <div class="card-body p-6">
-                    <h4 class="mb-4 h5">Thông tin sản phẩm</h4>
+                    <h4 class="mb-3 h5">Ảnh sản phẩm</h4>
+
+                    <!-- Nút chọn ảnh -->
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="categoryImage"
+                      name="image"
+                      required
+                    />
+
+                    <!-- Phần hiển thị ảnh sau khi tải lên -->
+                    <div id="imagePreviewContainer">
+                      <img
+                        id="imagePreview"
+                        class="image-preview"
+                        src=""
+                        alt="Ảnh sản phẩm sẽ hiển thị tại đây"
+                        style="
+                          display: none;
+                          margin-top: 20px;
+                          max-width: 100%;
+                          max-height: 400px;
+                          border-radius: 20px;
+                        "
+                      />
+                    </div>
+                    <h4 class="mb-4 h5 mt-5">Thông tin danh mục sản phẩm</h4>
+
                     <div class="row">
-                      <!-- Tiêu đề -->
+                      <!-- input -->
                       <div class="mb-3 col-lg-6">
-                        <label for="productName" class="form-label"
+                        <label for="categoryName" class="form-label"
                           >Tiêu đề</label
                         >
                         <input
                           type="text"
                           class="form-control"
-                          id="productName"
+                          id="categoryName"
                           name="name"
-                          placeholder="Tên sản phẩm"
+                          placeholder="Tên danh mục sản phẩm"
                           required
                         />
                       </div>
-                      <!-- Danh mục -->
-                      <div class="mb-3 col-lg-6">
-                        <label for="categoryInput" class="form-label"
-                          >Danh mục sản phẩm</label
-                        >
-                        <select
-                          class="form-select"
-                          id="categoryInput"
-                          name="category"
-                          required
-                        >
-                          <option value="">Chọn danh mục sản phẩm</option>
-                          <% if (categories && categories.length > 0) { %> <%
-                          categories.forEach(category => { %>
-                          <option value="<%= category.name %>">
-                            <%= category.name %>
-                            <!-- Hiển thị tên danh mục -->
-                          </option>
-                          <% }); %> <% } else { %>
-                          <option value="">No categories available</option>
-                          <% } %>
-                        </select>
-                      </div>
-                      <!-- Ảnh sản phẩm -->
-                      <div class="mb-3 col-lg-12 mt-5">
-                        <h4 class="mb-3 h5">Ảnh sản phẩm</h4>
-
-                        <!-- Nút chọn ảnh -->
-                        <input
-                          type="file"
-                          class="form-control"
-                          id="productImage"
-                          name="image"
-                          required
-                        />
-
-                        <!-- Phần hiển thị ảnh sau khi tải lên -->
-                        <div id="imagePreviewContainer">
-                          <img
-                            id="imagePreview"
-                            class="image-preview"
-                            src=""
-                            alt="Ảnh sản phẩm sẽ hiển thị tại đây"
-                            style="
-                              display: none;
-                              margin-top: 20px;
-                              max-width: 100%;
-                              max-height: 400px;
-                              border-radius: 20px;
-                            "
-                          />
-                        </div>
+                      <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary">
+                          Tạo danh mục
+                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <!-- Giá sản phẩm -->
-              <div class="col-lg-4 col-12">
-                <!-- card -->
-                <div class="card mb-6 card-lg">
-                  <!-- card body -->
-                  <div class="card-body p-6">
-                    <h4 class="mb-4 h5">Giá sản phẩm</h4>
-                    <div class="mb-3">
-                      <label for="productPrice" class="form-label">Giá</label>
-                      <input
-                        type="number"
-                        step="0.01"
-                        class="form-control"
-                        id="productPrice"
-                        name="price"
-                        placeholder="00.00 VND"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">
-                    Thêm sản phẩm
-                  </button>
                 </div>
               </div>
             </div>
@@ -187,7 +142,7 @@
     <script>
       // Lắng nghe sự kiện khi người dùng chọn file
       document
-        .getElementById("productImage")
+        .getElementById("categoryImage")
         .addEventListener("change", function (event) {
           const file = event.target.files[0];
 
