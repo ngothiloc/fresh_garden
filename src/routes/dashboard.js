@@ -10,4 +10,5 @@ router.get('/', (req, res) => {
 // Sử dụng các route của products
 router.use('/products', productsRoute);
 
+
 module.exports = router;

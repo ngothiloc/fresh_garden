@@ -6,16 +6,16 @@ const ProductsController = {
         try {
             // Lấy danh sách sản phẩm và danh mục
             const products = await ProductModel.getAllProducts();
-            const categories = await ProductModel.getCategories();
+            const { name } = req.query;
 
             // Truyền cả `products` và `categories` vào view
             res.render('dashboard_products', {
                 title: 'Products Dashboard',
                 products,
-                categories
+                searchQuery: name || ''
             });
         } catch (error) {
-            console.error('Error fetching products or categories:', error);
+            console.error('Error fetching products:', error);
             res.status(500).send('Server error');
         }
     },
@@ -58,6 +58,26 @@ const ProductsController = {
         } catch (error) {
             console.error('Error adding product:', error);
             res.status(500).send('Error adding product');
+        }
+    },
+
+    // Tìm kiếm sản phẩm theo tên
+    searchProducts: async function (req, res) {
+        try {
+            const { name } = req.query; // Lấy tên sản phẩm từ query string            
+
+            // Tìm kiếm sản phẩm theo tên nếu có
+            const products = await ProductModel.searchProductsByName(name);
+
+            // Trả về kết quả tìm kiếm
+            res.render('dashboard_products', {
+                title: 'Products Search Results',
+                products,
+                searchQuery: name || ''
+            });
+        } catch (error) {
+            console.error('Error searching products:', error);
+            res.status(500).send('Error searching products');
         }
     }
 };

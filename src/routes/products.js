@@ -14,4 +14,7 @@ router.get('/add_products', ProductsController.renderAddProductPage);
 // Route để xử lý thêm sản phẩm
 router.post('/add', upload.single('image'), ProductsController.addProduct);
 
+// Route tìm kiếm sản phẩm theo tên
+router.get('/search', ProductsController.searchProducts);
+
 module.exports = router;

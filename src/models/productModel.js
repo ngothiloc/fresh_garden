@@ -25,6 +25,7 @@ const ProductModel = {
         }
     },
 
+    // Thêm sản phẩm
     addProduct: async function (data) {
         try {
             const response = await axios.post(PRODUCTS_API_URL, data);
@@ -32,6 +33,17 @@ const ProductModel = {
         } catch (error) {
             console.error('Error adding product:', error);
             throw error;
+        }
+    },
+
+    // Tìm kiếm sản phẩm theo tên
+    searchProductsByName: async function (name) {
+        try {
+            const response = await axios.get(`${PRODUCTS_API_URL}/search`, { params: { name } });
+            return response.data;  // Trả về danh sách sản phẩm tìm được
+        } catch (error) {
+            console.error('Error searching products:', error);
+            return [];  // Trả về mảng trống nếu có lỗi
         }
     }
 };

@@ -108,6 +108,8 @@
                       <!-- Ảnh sản phẩm -->
                       <div class="mb-3 col-lg-12 mt-5">
                         <h4 class="mb-3 h5">Ảnh sản phẩm</h4>
+
+                        <!-- Nút chọn ảnh -->
                         <input
                           type="file"
                           class="form-control"
@@ -115,6 +117,23 @@
                           name="image"
                           required
                         />
+
+                        <!-- Phần hiển thị ảnh sau khi tải lên -->
+                        <div id="imagePreviewContainer">
+                          <img
+                            id="imagePreview"
+                            class="image-preview"
+                            src=""
+                            alt="Ảnh sản phẩm sẽ hiển thị tại đây"
+                            style="
+                              display: none;
+                              margin-top: 20px;
+                              max-width: 100%;
+                              max-height: 400px;
+                              border-radius: 20px;
+                            "
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -165,6 +184,28 @@
     <script src="../assets/js/vendors/editor.js"></script>
     <script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
     <script src="../assets/js/vendors/dropzone.js"></script>
+    <script>
+      // Lắng nghe sự kiện khi người dùng chọn file
+      document
+        .getElementById("productImage")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+
+          // Kiểm tra xem có file được chọn không
+          if (file) {
+            const reader = new FileReader();
+
+            // Khi đọc xong file, hiển thị ảnh
+            reader.onload = function (e) {
+              const imagePreview = document.getElementById("imagePreview");
+              imagePreview.src = e.target.result; // Cập nhật src của ảnh
+              imagePreview.style.display = "block"; // Hiển thị ảnh
+            };
+
+            reader.readAsDataURL(file); // Đọc file dưới dạng base64
+          }
+        });
+    </script>
   </body>
 
   <!-- Mirrored from freshcart.codescandy.com/dashboard/add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:48:09 GMT -->
