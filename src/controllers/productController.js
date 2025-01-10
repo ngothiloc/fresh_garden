@@ -38,7 +38,7 @@ const ProductsController = {
 
     addProduct: async function (req, res) {
         try {
-            const { name, category, price } = req.body;
+            const { name, category, price, quantity } = req.body;
             const imageFileName = req.file ? req.file.filename : null; // Lấy tên file ảnh từ multer
 
             // Nếu có ảnh, tạo đường dẫn đầy đủ
@@ -51,6 +51,7 @@ const ProductsController = {
                 name,
                 category,
                 price,
+                quantity,
                 image: imagePath, // Lưu đường dẫn ảnh đầy đủ vào cơ sở dữ liệu
             });
 

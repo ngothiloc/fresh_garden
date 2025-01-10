@@ -40,24 +40,24 @@ router.get('/products/:id', async (req, res) => {
     }
 });
 
-// Search Products by Query
-router.get('/search', async (req, res) => {
-    const { q: query } = req.query;
+// // Search Products by Query
+// router.get('/search', async (req, res) => {
+//     const { q: query } = req.query;
 
-    try {
-        const products = (await axios.get(PRODUCT_API_URL)).data;
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(query.toLowerCase())
-        );
+//     try {
+//         const products = (await axios.get(PRODUCT_API_URL)).data;
+//         const filteredProducts = products.filter(product =>
+//             product.name.toLowerCase().includes(query.toLowerCase())
+//         );
 
-        res.render('search', {
-            title: 'Search Results',
-            products: filteredProducts
-        });
-    } catch (error) {
-        console.error('Error fetching search results:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+//         res.render('search', {
+//             title: 'Search Results',
+//             products: filteredProducts
+//         });
+//     } catch (error) {
+//         console.error('Error fetching search results:', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 module.exports = router;

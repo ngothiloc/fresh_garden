@@ -113,6 +113,7 @@
                           <th>Sản phẩm</th>
                           <th>Danh mục</th>
                           <th>Giá</th>
+                          <th>Số lượng</th>
                           <!-- <th>Create at</th> -->
                           <th></th>
                         </tr>
@@ -131,8 +132,7 @@
                               <img
                                 src="<%= product.image %>"
                                 alt="<%= product.name %>"
-                                class="icon-shape icon-md"
-                                style="border-radius: 5px"
+                                class="icon-shape icon-md rounded"
                               />
                             </a>
                           </td>
@@ -143,6 +143,7 @@
                           </td>
                           <td><%= product.category %></td>
                           <td><%= product.price %> VND</td>
+                          <td><%= product.quantity %></td>
                           <td>
                             <div class="dropdown">
                               <a

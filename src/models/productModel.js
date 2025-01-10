@@ -14,6 +14,7 @@ const ProductModel = {
             return [];  // Trả về mảng trống nếu có lỗi
         }
     },
+
     // Lấy danh sách các danh mục
     getCategories: async function () {
         try {
