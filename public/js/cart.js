@@ -116,7 +116,6 @@ function updateCartUI() {
     cartList.insertAdjacentHTML("beforeend", cartItemHTML); // Insert each product into the cart UI
   });
 }
-
 // Update product quantity in the cart
 function updateQuantity(productId, newQuantity) {
   const product = cart.find(item => item.id === productId);

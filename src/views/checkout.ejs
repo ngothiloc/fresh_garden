@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from freshcart.codescandy.com/pages/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:46:54 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <style>
+      /* Định dạng thông báo */
+      #order-success-notification {
+        position: fixed;
+        bottom: 20px;
+        left: 80%;
+        transform: translateX(-50%);
+        background-color: #d1e7dd; /* Màu xanh lá */
+        color: #29513f;
+        border-width: 10px;
+        border-color: #a8d2bf;
+        border-radius: 5px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        z-index: 9999;
+      }
+
+      /* Khi thông báo hiển thị */
+      #order-success-notification.show {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+    <%- include('./partials/head', { title: 'Thanh toán' }) %>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <%- include('./partials/navbar') %>
+    <!-- Modal -->
+    <!-- Shop Cart -->
+    <%- include('./partials/shopcart') %>
+
+    <script src="../assets/js/vendors/validation.js"></script>
+
+    <main>
+      <!-- section-->
+      <div class="mt-4">
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <!-- col -->
+            <div class="col-12">
+              <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class=""><a href="#!">Home /</a></li>
+                  <li class=""><a href="#!">Shop /</a></li>
+                  <li class="active" aria-current="page">Shop Checkout</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- section -->
+      <section class="mb-lg-14 mb-8 mt-8">
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <!-- col -->
+            <div class="col-12">
+              <div>
+                <div class="mb-8">
+                  <!-- text -->
+                  <h1 class="fw-bold mb-0">Đặt hàng</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <!-- row -->
+            <div class="row">
+              <div class="col-xl-7 col-lg-6 col-md-12">
+                <!-- accordion -->
+                <div
+                  class="accordion accordion-flush"
+                  id="accordionFlushExample"
+                >
+                  <!-- accordion item -->
+                  <div class="accordion-item py-4">
+                    <a
+                      href="#"
+                      class="text-inherit h5"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseOne"
+                      aria-expanded="true"
+                      aria-controls="flush-collapseOne"
+                    >
+                      <i
+                        class="feather-icon icon-shopping-bag me-2 text-muted"
+                      ></i>
+                      Thông tin đặt hàng
+                      <!-- collapse -->
+                    </a>
+                    <div
+                      id="flush-collapseOne"
+                      class="accordion-collapse collapse show"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="mt-5">
+                        <div class="row">
+                          <div class="mb-3 col-lg-6">
+                            <label for="fullName" class="form-label"
+                              >Họ và tên</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="fullName"
+                              name="fullName"
+                              placeholder="Họ và tên"
+                              required
+                            />
+                          </div>
+
+                          <div class="mb-3 col-lg-6">
+                            <label for="phoneNumber" class="form-label"
+                              >Số điện thoại</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="phoneNumber"
+                              name="phoneNumber"
+                              placeholder="Số điện thoại"
+                              required
+                            />
+                          </div>
+
+                          <!-- Địa chỉ nằm riêng một hàng -->
+                          <div class="mb-3 col-12">
+                            <label for="address" class="form-label"
+                              >Địa chỉ</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="address"
+                              name="address"
+                              placeholder="Địa chỉ"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div class="mt-5 d-flex justify-content-end">
+                          <a
+                            href="#"
+                            class="btn btn-primary ms-2"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseTwo"
+                          >
+                            Tiếp
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- accordion item -->
+                  <div class="accordion-item py-4">
+                    <a
+                      href="#"
+                      class="text-inherit collapsed h5"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseTwo"
+                    >
+                      <i class="feather-icon icon-clock me-2 text-muted"></i>
+                      Thời gian đặt hàng
+                    </a>
+                    <!-- collapse -->
+                    <div
+                      id="flush-collapseTwo"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <!-- card chứa thời gian hiện tại -->
+                      <div class="card shadow-sm p-4 mt-3">
+                        <div class="card-body">
+                          <h5 class="card-title">Thời gian hiện tại</h5>
+                          <p id="current-time" class="card-text"></p>
+                        </div>
+                      </div>
+                      <!-- tab content -->
+                      <div class="mt-5 d-flex justify-content-end">
+                        <a
+                          href="#"
+                          class="btn btn-outline-gray-400 text-muted"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#flush-collapseOne"
+                          aria-expanded="false"
+                          aria-controls="flush-collapseOne"
+                        >
+                          Prev
+                        </a>
+                        <a
+                          href="#"
+                          class="btn btn-primary ms-2"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#flush-collapseThree"
+                          aria-expanded="false"
+                          aria-controls="flush-collapseThree"
+                        >
+                          Next
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <script>
+                    // Hàm để lấy thời gian hiện tại và hiển thị vào thẻ
+                    function updateTime() {
+                      const currentTimeElement =
+                        document.getElementById("current-time");
+                      const now = new Date();
+                      const timeString = now.toLocaleString();
+                      currentTimeElement.textContent = timeString;
+                    }
+
+                    updateTime();
+                    setInterval(updateTime, 1000);
+                  </script>
+                  <!-- accordion item -->
+                  <div class="accordion-item py-4">
+                    <a
+                      href="#"
+                      class="text-inherit h5"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseThree"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseThree"
+                    >
+                      <i
+                        class="feather-icon icon-credit-card me-2 text-muted"
+                      ></i>
+                      Phương thức thanh toán
+                      <!-- collapse -->
+                    </a>
+                    <div
+                      id="flush-collapseThree"
+                      class="accordion-collapse collapse"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="mt-5">
+                        <div>
+                          <div class="card card-bordered shadow-none mb-2">
+                            <!-- card body -->
+                            <div class="card-body p-6">
+                              <div
+                                class="d-flex justify-content-between align-items-center"
+                              >
+                                <div>
+                                  <!-- Mô tả phương thức thanh toán -->
+                                  <h5 class="mb-1 h6">
+                                    Chọn phương thức thanh toán
+                                  </h5>
+                                  <p class="mb-0 small">
+                                    Vui lòng chọn phương thức thanh toán bạn
+                                    muốn sử dụng.
+                                  </p>
+                                </div>
+                                <div>
+                                  <!-- Thanh chọn phương thức thanh toán -->
+                                  <select
+                                    id="paymentMethod"
+                                    name="payment_method"
+                                    class="form-select"
+                                    required
+                                  >
+                                    <option value="paypal">
+                                      Thanh toán chuyển khoản
+                                    </option>
+                                    <option value="cashonDelivery">
+                                      Thanh toán khi nhận hàng
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Button -->
+                          <div class="mt-5 d-flex justify-content-end">
+                            <a
+                              href="#"
+                              class="btn btn-outline-gray-400 text-muted"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#flush-collapseThree"
+                              aria-expanded="false"
+                              aria-controls="flush-collapseThree"
+                            >
+                              Prev
+                            </a>
+                            <a
+                              href="#"
+                              id="placeOrderButton"
+                              class="btn btn-primary ms-2"
+                              >Place Order</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 offset-xl-1 col-xl-4 col-lg-6">
+                <div class="mt-4 mt-lg-0">
+                  <div class="card shadow-sm">
+                    <h5 class="px-6 py-4 bg-transparent mb-0">Đơn hàng</h5>
+                    <ul
+                      class="list-group list-group-flush"
+                      id="localStorage-products"
+                    >
+                      <!-- Dữ liệu sản phẩm từ localStorage sẽ được thêm vào đây -->
+                    </ul>
+                    <script src="/js/checkout.js"></script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Javascript-->
+    <%- include('./partials/js.ejs') %>
+  </body>
+
+  <!-- Mirrored from freshcart.codescandy.com/pages/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Dec 2024 07:46:55 GMT -->
+</html>
