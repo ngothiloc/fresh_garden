@@ -69,3 +69,27 @@
     y.parentNode.insertBefore(t, y);
   })(window, document, "clarity", "script", "kuc8w5o9nt");
 </script>
+<style>
+  /* Thêm CSS cho thông báo */
+  #add-to-cart-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #d1e7dd;
+    color: #29513f;
+    padding: 10px 20px;
+    border-width: 10px;
+    border-color: #a8d2bf;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  #add-to-cart-notification.show {
+    display: block;
+    opacity: 1;
+  }
+</style>

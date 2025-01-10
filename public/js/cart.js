@@ -22,6 +22,27 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCartUI();
 });
 
+// Hiển thị thông báo thêm sản phẩm vào giỏ hàng
+function showAddToCartNotification() {
+  const notification = document.createElement('div');
+  notification.id = 'add-to-cart-notification';
+  notification.textContent = 'Bạn đã thêm 1 sản phẩm vào giỏ hàng';
+
+  // Thêm thông báo vào body
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 100);
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      notification.remove();
+    }, 500);
+  }, 3000);
+}
+
 // Add product to cart
 function addToCart(product) {
   const existingProduct = cart.find(item => item.id === product.id); // Check if the product is already in the cart
@@ -33,6 +54,7 @@ function addToCart(product) {
 
   localStorage.setItem("cart", JSON.stringify(cart)); // Store the updated cart in localStorage
   updateCartUI(); // Update the cart UI
+  showAddToCartNotification(); // Show the notification
 }
 
 // Update the cart UI
@@ -89,7 +111,6 @@ function updateCartUI() {
           <div class="col-4 text-end">
             <span>${formatPrice(item.price * item.quantity)}</span>
           </div>
-           
         </div>
       </li>`;
     cartList.insertAdjacentHTML("beforeend", cartItemHTML); // Insert each product into the cart UI
